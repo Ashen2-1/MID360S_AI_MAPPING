@@ -1,0 +1,16 @@
+IMU-Based Mapping Confidence Summary
+====================================
+
+Dataset: G:\MID360S_AI_MAPPING\data/test01_imu.csv
+Duration: 106.65 seconds
+Total IMU samples: 21331
+
+Motion Classification:
+- Stable: 19882 samples (93.2%)
+- Moving: 454 samples (2.1%)
+- Unstable: 995 samples (4.7%)
+
+Mapping Interpretation:
+- Stable segments are high-confidence for mapping.
+- Moving segments may cause point-cloud distortion.
+- Unstable segments should be treated as low-confidence or excluded from static mapping.
