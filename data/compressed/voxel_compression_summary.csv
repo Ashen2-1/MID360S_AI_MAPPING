@@ -1,0 +1,4 @@
+voxel_size_m,original_points,compressed_points,compression_ratio,original_est_size_mb,compressed_est_size_mb,processing_time_sec,output_path
+0.05,19939968,62810,317.46486228307595,304.259765625,0.958404541015625,4.306610345840454,G:\MID360S_AI_MAPPING\data\compressed\test01_voxel_5cm.ply
+0.1,19939968,15069,1323.244276328887,304.259765625,0.2299346923828125,5.066098928451538,G:\MID360S_AI_MAPPING\data\compressed\test01_voxel_10cm.ply
+0.2,19939968,3765,5296.140239043824,304.259765625,0.0574493408203125,4.211450576782227,G:\MID360S_AI_MAPPING\data\compressed\test01_voxel_20cm.ply

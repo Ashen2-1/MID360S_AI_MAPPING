@@ -6,13 +6,13 @@ import matplotlib.patches as mpatches
 
 ##################################################
 # Here are the File Path one is input .ply file and one is output location
-# PLY_PATH = "data/mid360s_test_01.ply" # The file that currently read in.
-PLY_PATH = r"G:\MID360S_AI_MAPPING\data\mid360s_test_01.ply"
-# OUT_PATH = "outputs/height_risk_map.png"
-OUT_PATH = r"G:\MID360S_AI_MAPPING\outputs\height_risk_map.png"
+# PLY_PATH = "data/test01_high_confidence_only.ply" # The file that currently read in.
+PLY_PATH = r"G:\MID360S_AI_MAPPING\data\test01_high_confidence_only.ply"
+# OUT_PATH = "outputs/test01_high_confidence_map.png"
+OUT_PATH = r"G:\MID360S_AI_MAPPING\outputs\test01_high_confidence_map_height_risk.png"
 
-DENSITY_DEBUG_PATH = "outputs/debug_density_map.png"
-HEIGHT_DEBUG_PATH = "outputs/debug_height_range_map.png"
+DENSITY_DEBUG_PATH = "outputs/debug_density_test01_high_confidence_only_map.png"
+HEIGHT_DEBUG_PATH = "outputs/debug_height_test01_high_confidence_only_range_map.png"
 ##################################################
 
 # Each grid cell represents 5 cm x 5cm

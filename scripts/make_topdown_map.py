@@ -2,8 +2,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-PLY_PATH = "data/mid360s_test_01.ply"
-OUT_PATH = "outputs/topdown_map.png"
+# PLY_PATH = "data/test01_high_confidence_only.ply" # The file that currently read in.
+PLY_PATH = r"G:\MID360S_AI_MAPPING\data\test01_high_confidence_only.ply"
+# OUT_PATH = "outputs/test01_high_confidence_map.png"
+OUT_PATH = r"G:\MID360S_AI_MAPPING\outputs\test01_high_confidence_map.png"
+
 
 # grid resolution in meters
 RESOLUTION = 0.05
