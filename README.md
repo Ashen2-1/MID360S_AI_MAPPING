@@ -1,34 +1,73 @@
-# MID360S AI Mapping
+# LiDAR–IMU Autonomous Mapping & UAV Perception Platform
 
-This project is an early-stage MVP for AI-assisted 3D terrain and hazard mapping using a Livox Mid-360S LiDAR sensor.
+A portable 3D sensing and mapping platform built around the **Livox Mid-360S LiDAR**, IMU, Raspberry Pi/Linux compute, ROS 2, C++, and Python.
 
-The goal is to turn raw LiDAR point cloud data into useful safety information, including top-down maps, risk maps, obstacle regions, and eventually safe-route recommendations for small robots operating in indoor, underground, or GPS-denied environments.
+The system captures real-time LiDAR and inertial data, records synchronized sensor streams, exports 3D point clouds, and processes them into environment maps for localization, terrain analysis, obstacle perception, and future autonomous navigation.
 
-## Project Vision
+The project is being developed from a handheld / ground sensing platform toward **LiDAR–IMU SLAM and UAV perception in GPS-limited environments**.
 
-Many dangerous environments, such as caves, tunnels, mines, collapsed buildings, and disaster-response areas, are unsafe for humans to enter directly. This project explores how LiDAR and AI can help a small robot scan these environments, understand the 3D structure, detect potential hazards, and recommend safer paths.
+---
 
-The long-term goal is to build a system that can support:
+## Overview
 
-- 3D terrain scanning
-- Indoor and underground mapping
-- Traversability analysis
-- Hazard and obstacle detection
-- Collapse-risk indicators
-- Safe-route planning
-- VR or AR-based scene replay
+Autonomous robots and UAVs operating indoors, underground, or in degraded-visibility environments cannot always rely on GPS or conventional cameras.
 
-## Current MVP Scope
+This project explores a perception pipeline that allows a mobile platform to:
 
-The first MVP focuses on a small ground-based platform instead of a drone. The current system pipeline is:
+- capture 3D LiDAR data in real time
+- acquire high-rate IMU measurements
+- record sensor data headlessly on an embedded computer
+- reconstruct and analyze 3D environments
+- generate occupancy and terrain-risk representations
+- develop LiDAR–IMU localization and SLAM
+- support future UAV perception and autonomous navigation
+
+Potential applications include:
+
+- underground and cave mapping
+- search-and-rescue
+- inspection of tunnels and confined spaces
+- obstacle detection
+- autonomous aerial sensing
+- GPS-denied navigation
+
+---
+
+## System Architecture
 
 ```text
-Mid-360S LiDAR
-→ Livox SDK2
-→ Custom ROS2 bridge
-→ /livox/lidar PointCloud2 topic
-→ rosbag recording
-→ PLY point cloud export
-→ Python mapping scripts
-→ Top-down occupancy map
-→ Risk map
+Livox Mid-360S
+      │
+      │ Ethernet
+      ▼
+Livox SDK2
+      │
+      ▼
+Custom ROS 2 Interface
+      │
+      ├── PointCloud2 LiDAR stream
+      │
+      └── ~200 Hz IMU stream
+      │
+      ▼
+Raspberry Pi / Linux
+      │
+      ├── Headless recording
+      ├── Sensor logging
+      ├── rosbag / data storage
+      └── PLY export
+      │
+      ▼
+Point-Cloud Processing
+      │
+      ├── Confidence filtering
+      ├── Voxel downsampling
+      ├── Occupancy mapping
+      ├── Density analysis
+      └── Height-aware risk mapping
+      │
+      ▼
+LiDAR–IMU SLAM / Localization
+      │
+      ▼
+Autonomous Navigation / UAV Perception
