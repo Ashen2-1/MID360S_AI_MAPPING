@@ -1,81 +1,10 @@
-Hardware
-Livox Mid-360S LiDAR
-Raspberry Pi
-Integrated IMU
-SSD storage
-Portable battery and power-conversion system
-Ethernet communication
-Custom 3D-printed mechanical enclosure / mounts
-
-The portable hardware stack was designed to support headless field data collection without requiring a laptop during operation.
-
-Software Stack
-Robotics / Embedded
-ROS 2
-Livox SDK2
-C++
-Python
-Linux
-Point-Cloud Processing
-PLY point-cloud export
-confidence filtering
-voxel downsampling
-occupancy mapping
-density-based analysis
-height-aware terrain / risk analysis
-Development
-Git / GitHub
-GCC / Makefile
-Raspberry Pi Linux environment
-Current Capabilities
-Real-Time Sensor Acquisition
-
-The custom ROS 2 interface publishes:
-
-real-time Livox Mid-360S point clouds using sensor_msgs/PointCloud2
-approximately 200 Hz IMU measurements
-
-The data can be recorded for later playback, visualization, and processing.
-
-Portable Data Logging
-
-The sensing stack supports:
-
-headless startup
-LiDAR and IMU recording
-SSD-based data storage
-PLY export for offline analysis
-portable power operation
-3D Point-Cloud Processing
-
-Current processing includes:
-
-confidence-based filtering
-voxel downsampling for point-cloud compression
-top-down occupancy representations
-density-based environment analysis
-height-aware terrain and obstacle-risk mapping
-
-These processing stages convert raw LiDAR measurements into representations that are more useful for robotic perception and navigation.
-
-Example Data Flow
-Raw LiDAR Scan
-      ↓
-Confidence Filtering
-      ↓
-Voxel Downsampling
-      ↓
-3D Point Cloud
-      ↓
-Occupancy / Density / Height Analysis
-      ↓
-Environment Risk Map
-LiDAR–IMU SLAM
+## LiDAR–IMU SLAM
 
 The next stage of the project focuses on combining LiDAR geometry with IMU motion information for localization and mapping.
 
 The intended pipeline is:
 
+```text
 IMU Motion Estimate
         +
 LiDAR Scan Matching
@@ -90,22 +19,23 @@ Key topics being developed include:
 
 LiDAR scan matching
 IMU motion compensation
-coordinate-frame transformations
-sensor calibration
-drift reduction
-pose estimation
-loop closure
+Coordinate-frame transformations
+Sensor calibration
+Drift reduction
+Pose estimation
+Loop closure
 ROS 2 TF integration
 UAV Integration
 
-A parallel 5-inch FPV UAV platform has been assembled to build experience with real flight hardware, including:
+A parallel 5-inch FPV UAV platform has been assembled to build practical experience with real flight hardware, including:
 
 F4 flight controller
 45A ESC
-brushless motors
+Brushless motors
 FPV camera and video transmitter
-radio hardware
-power wiring and soldering
+Radio hardware
+Power wiring and soldering
+Mechanical assembly and component integration
 
 The long-term goal is to integrate a lightweight version of the LiDAR–IMU perception stack with an aerial platform.
 
@@ -128,54 +58,169 @@ Results So Far
 
 Current validated outputs include:
 
-real-time LiDAR point-cloud acquisition
-approximately 200 Hz IMU streaming
+Real-time LiDAR point-cloud acquisition
+Approximately 200 Hz IMU streaming
 ROS 2 sensor publishing
-point-cloud recording and playback
+Point-cloud recording and playback
 PLY export
-confidence filtering
-voxel-based point-cloud compression
-occupancy mapping
-density-based analysis
-height-aware risk-map generation
+Confidence filtering
+Voxel-based point-cloud compression
+Occupancy mapping
+Density-based analysis
+Height-aware risk-map generation
+Testing and Validation
+
+Testing currently focuses on validating the full sensing pipeline from hardware acquisition to offline 3D processing.
+
+Indoor / Bench Testing
+
+Validated components include:
+
+LiDAR communication over Ethernet
+ROS 2 point-cloud publishing
+IMU data acquisition
+Headless recording
+SSD-based data storage
+PLY export
+Point-cloud filtering and compression
+Occupancy and risk-map generation
+Portable System Testing
+
+The handheld system is designed to validate:
+
+Portable power operation
+Reliable headless startup
+Continuous LiDAR / IMU recording
+Data storage without a connected laptop
+Mechanical stability of the sensing stack
+Field-ready cable and power management
+Field Testing
+
+Field testing will evaluate:
+
+Sensor reliability during continuous movement
+Point-cloud quality in larger environments
+IMU behavior during motion
+Mapping consistency
+Portable power endurance
+Data integrity during extended recordings
+Performance in GPS-limited and low-visibility environments
+Demo and Visual Results
+Hardware
+
+Add a photo of the completed handheld LiDAR–IMU system here.
+
+![Portable LiDAR–IMU System](docs/images/lidar_handheld.jpg)
+Real-Time LiDAR Visualization
+
+Add a screenshot from RViz or another point-cloud visualization tool.
+
+![Real-Time LiDAR Point Cloud](docs/images/rviz_pointcloud.png)
+Processed Point Cloud
+
+Add an example showing the filtered / voxel-downsampled output.
+
+![Processed Point Cloud](docs/images/processed_pointcloud.png)
+Environment / Risk Map
+
+Add an occupancy, density, or height-aware map.
+
+![Environment Risk Map](docs/images/risk_map.png)
+Field-Test Demo
+
+For a short demo video, use either:
+
+a GitHub-hosted short video / GIF
+a YouTube link
+a portfolio website link
+
+Example:
+
+[Watch the field-test demo](https://your-demo-link-here.com)
 Project Status
 
 Active development — 2026
 
 Current focus:
 
-portable field-data acquisition
+Portable field-data acquisition
 LiDAR–IMU motion compensation
 SLAM and localization
-improved 3D reconstruction
+Improved 3D reconstruction
+Camera–LiDAR integration
 UAV perception integration
-autonomous obstacle-aware navigation
+Autonomous obstacle-aware navigation
 Repository Structure
 MID360S_AI_MAPPING/
 ├── data/
-│   └── recorded and processed point-cloud data
+│   ├── raw/
+│   ├── segments/
+│   └── processed/
 ├── scripts/
-│   └── Python processing and mapping scripts
+│   ├── batch/
+│   ├── mapping/
+│   └── visualization/
+├── ros2/
+│   └── sensor interface / bridge code
+├── docs/
+│   └── images/
 ├── README.md
 └── requirements.txt
+
+Repository structure may evolve as the SLAM and UAV integration components are added.
+
 Future Development
 
-Planned work includes:
+Planned development includes:
 
 LiDAR–IMU SLAM
-improved sensor synchronization
-camera–LiDAR calibration
-colorized 3D reconstruction
-obstacle detection
-safe-route planning
-PX4 / UAV integration
-real-time visualization
-field deployment in GPS-denied environments
+Improved LiDAR / IMU synchronization
+IMU-based motion compensation
+Scan matching and pose estimation
+Camera–LiDAR calibration
+Colorized 3D reconstruction
+Obstacle detection
+Safe-route planning
+Real-time local mapping
+ROS 2 TF integration
+PX4 / flight-controller integration
+UAV simulation and testing
+Real-time visualization
+Field deployment in GPS-denied environments
+Engineering Goals
+
+The project is intended to evolve from a portable sensing and mapping platform into a more complete autonomous perception stack.
+
+The long-term system goal is:
+
+Sensors
+   ↓
+Perception
+   ↓
+Localization
+   ↓
+Mapping
+   ↓
+Obstacle Understanding
+   ↓
+Path Planning
+   ↓
+Autonomous Navigation
+
+The focus is not only on individual algorithms, but also on the integration required to make the complete system work reliably on real hardware.
+
 Author
 
 Tom Li
 Computer Engineering — University of Waterloo
 
-Interests: Robotics · Autonomous Systems · LiDAR · SLAM · Embedded Systems · AI
+Areas of interest:
 
-GitHub: Ashen2-1
+Robotics
+Autonomous Systems
+LiDAR
+SLAM
+Sensor Fusion
+Embedded Systems
+UAVs
+AI / Computer Vision
