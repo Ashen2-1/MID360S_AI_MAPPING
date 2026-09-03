@@ -17,7 +17,7 @@ The current system already supports real-time sensor acquisition, point-cloud pr
 
 ## System Overview
 
-The current pipeline is:
+Current validated pipeline:
 
 ```text
 Livox Mid-360S LiDAR
@@ -39,7 +39,7 @@ Height / Occupancy Analysis
 Terrain & Obstacle Risk Mapping
 ```
 
-The next stages extend this pipeline toward:
+The next stages extend this toward:
 
 ```text
 LiDAR + IMU
@@ -106,7 +106,7 @@ A parallel **5-inch FPV UAV platform** is also being developed for future aerial
 
 ## Current Validated Capabilities
 
-The following components have been implemented and tested:
+Implemented and tested:
 
 - Real-time Livox LiDAR acquisition
 - ROS 2 `PointCloud2` publishing
@@ -129,39 +129,23 @@ The following components have been implemented and tested:
 
 IMU data is used to characterize sensor motion during acquisition.
 
-The current analysis considers:
+Current analysis considers:
 
 - gyroscope magnitude
 - acceleration magnitude
 - deviation from gravitational acceleration
 - stable / moving / unstable motion states
 
-This provides motion feedback that will later support:
+This motion feedback will later support:
 
 - motion compensation
 - scan alignment
 - pose estimation
 - LiDAR–IMU sensor fusion
 
-### Example Result
+### Example IMU Result
 
-```text
-Gyroscope magnitude
-        ↓
-Acceleration magnitude
-        ↓
-Deviation from gravity
-        ↓
-Motion-state classification
-        ↓
-stable / moving / unstable
-```
-
-Add the IMU motion plot here:
-
-```markdown
-![IMU Motion Feedback](docs/images/imu-motion-feedback.png)
-```
+![IMU Motion Feedback](scripts/outputs/imu_motion_summary.png)
 
 ---
 
@@ -169,14 +153,7 @@ Add the IMU motion plot here:
 
 Raw LiDAR point clouds are converted into voxelized representations for more efficient spatial analysis.
 
-Multiple voxel resolutions are tested to study the trade-off between:
-
-- spatial detail
-- computational cost
-- map density
-- obstacle visibility
-
-Current tested resolutions include:
+Current tested voxel resolutions include:
 
 - 5 cm
 - 10 cm
@@ -195,13 +172,13 @@ The voxelized data is used for:
 
 Each spatial cell is analyzed using local vertical variation.
 
-Height range is defined conceptually as:
+Conceptually:
 
 ```text
 height_range = max(z) - min(z)
 ```
 
-for points inside a local voxel / grid region.
+for points inside a local voxel or grid region.
 
 This helps identify:
 
@@ -211,11 +188,17 @@ This helps identify:
 - obstacles
 - geometry transitions
 
-Example:
+### 5 cm Height-Range Map
 
-```markdown
-![Height Range Map](docs/images/height-range-5cm.png)
-```
+![Height Range Map - 5 cm](outputs/compression_maps/height_range_voxel_5cm.png)
+
+### 10 cm Height-Range Map
+
+![Height Range Map - 10 cm](outputs/compression_maps/height_range_voxel_10cm.png)
+
+### 20 cm Height-Range Map
+
+![Height Range Map - 20 cm](outputs/compression_maps/height_range_voxel_20cm.png)
 
 ---
 
@@ -230,13 +213,19 @@ Current categories include:
 - **Danger / Obstacle**
 - **Unknown / Empty**
 
-Example:
+### 5 cm Risk Map
 
-```markdown
-![Height-Aware Risk Map](docs/images/risk-map-5cm.png)
-```
+![Risk Map - 5 cm](outputs/compression_maps/risk_voxel_5cm.png)
 
-This layer is intended to provide higher-level information for future decision-making and navigation.
+### 10 cm Risk Map
+
+![Risk Map - 10 cm](outputs/compression_maps/risk_voxel_10cm.png)
+
+### 20 cm Risk Map
+
+![Risk Map - 20 cm](outputs/compression_maps/risk_voxel_20cm.png)
+
+These maps are intended to provide higher-level spatial information for future decision-making and autonomous navigation.
 
 ---
 
@@ -275,9 +264,9 @@ Current development topics include:
 
 ## Decision Model
 
-The next higher-level layer of the project will use perception outputs to support autonomous decision-making.
+A later stage of the project will use perception outputs to support autonomous decision-making.
 
-The intended structure is:
+Intended structure:
 
 ```text
 Perception Outputs
@@ -296,7 +285,7 @@ Risk / Cost Evaluation
 Selected Action
 ```
 
-The decision model will be developed to evaluate:
+The future decision model will consider:
 
 - obstacle proximity
 - terrain risk
@@ -305,7 +294,7 @@ The decision model will be developed to evaluate:
 - localization confidence
 - mission objectives
 
-Possible future approaches include:
+Potential approaches include:
 
 - rule-based decision systems
 - cost functions
@@ -319,7 +308,7 @@ These components are planned and are not yet considered completed functionality.
 
 ## Autonomous Navigation Architecture
 
-The long-term autonomy stack is:
+Long-term autonomy stack:
 
 ```text
 Sensors
@@ -425,29 +414,6 @@ Field testing will evaluate:
 
 ---
 
-## Visual Results
-
-Recommended images:
-
-```text
-docs/images/
-├── imu-motion-feedback.png
-├── height-range-5cm.png
-├── risk-map-5cm.png
-├── rviz-pointcloud.png
-└── handheld-system.jpg
-```
-
-Suggested order in this README:
-
-1. handheld hardware
-2. RViz point cloud
-3. IMU motion plot
-4. height-range map
-5. risk map
-
----
-
 ## Current Development
 
 Current focus areas:
@@ -485,9 +451,9 @@ Planned development:
 LiDAR-IMU-Autonomous-Perception/
 ├── data/
 ├── outputs/
+│   └── compression_maps/
 ├── scripts/
-├── docs/
-│   └── images/
+│   └── outputs/
 ├── requirements.txt
 ├── .gitignore
 └── README.md
